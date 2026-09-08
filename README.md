@@ -1,8 +1,7 @@
 # Finite presentations of metabelian groups
 
 Lean 4 formalisation accompanying **Finite presentations of metabelian groups:
-effective enumeration via Laurent relations**, by
-[Achyuth Jayadevan](https://orcid.org/0009-0008-8745-4078).
+effective enumeration via Laurent relations**.
 
 ## Finite presentations and their encoding
 
@@ -225,7 +224,7 @@ $\mathrm{Row.eval}\leq 0$.
 
 ## Reproducing the verification
 
-With [Elan](https://leanprover-community.github.io/get_started.html) and Python 3 installed:
+With [Elan](https://leanprover-community.github.io/get_started.html) installed:
 
 ```sh
 git clone https://github.com/Achxy/k-17-124.git
@@ -238,7 +237,7 @@ Lean **4.24.0** and the full Mathlib dependency graph are pinned. The check
 builds both complete theorem routes and the examples, treats Lean warnings as
 failures, and audits transitive dependencies for additional axioms.
 The permitted axioms are `propext`, `Classical.choice`, and `Quot.sound`.
-[scripts/check.sh](scripts/check.sh) runs the layout check, Lean build, and
+[scripts/check.sh](scripts/check.sh) runs the Lean build and
 [Audit.lean](Audit.lean). The audit traverses the proof dependencies of project
 declarations, including private declarations.
 
