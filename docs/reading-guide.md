@@ -60,7 +60,8 @@ identities into surjections from the finite-cover family.
 
 The longer halfspace argument is separated into path geometry, Schreier
 relators, the two-halfspace splitting obstruction, and module generation.
-The adapted Schreier rewriting development is infrastructure for this step.
+The [Schreier presentation](../Kourovka/Schreier/KernelPresentation.lean)
+is constructed from group-valued path lifting and inverse quotient homomorphisms.
 
 ## 5. Why are all checks effective?
 

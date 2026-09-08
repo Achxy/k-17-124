@@ -13,8 +13,8 @@ Actual words realizing halfspace Schreier generators.
 namespace Kourovka.MetabelianEnumeration.SchreierHeights
 
 open HalfspaceGeometry
-open Kourovka.Schreier.Discrete
-open Kourovka.Schreier.Discrete.SchreierRewriting
+open Kourovka.Schreier
+open Kourovka.Schreier.Transversal
 
 variable {X : Type*}
 
@@ -50,24 +50,24 @@ theorem path_shift (θ : FreeGroup X →* Multiplicative ℝ) {P Q : ℝ → Pro
 /-- The standard Schreier generator is represented by the outgoing section
 path, its edge, and the returning section path. -/
 def generatorWord [DecidableEq X] {L : Subgroup (FreeGroup X)}
-    (S : RightSchreierRepresentative L) (z : RepresentativeSchreierSymbol S) :
+    (S : Transversal L) (z : S.Edge) :
     List (X × Bool) :=
   z.1.val.toWord ++ [(z.2, true)] ++
-    FreeGroup.invRev (S.representative (z.1.val * FreeGroup.of z.2)).toWord
+    FreeGroup.invRev (S.rep (z.1.val * FreeGroup.of z.2)).toWord
 
 @[simp] theorem generatorWord_eval [DecidableEq X] {L : Subgroup (FreeGroup X)}
-    (S : RightSchreierRepresentative L) (z : RepresentativeSchreierSymbol S) :
-    FreeGroup.mk (generatorWord S z) = representativeSymbolEval S z := by
+    (S : Transversal L) (z : S.Edge) :
+    FreeGroup.mk (generatorWord S z) = S.edgeValue z := by
   simp only [generatorWord, ← FreeGroup.mul_mk, ← FreeGroup.inv_mk, FreeGroup.mk_toWord]
   rfl
 
 theorem generatorWord_path [DecidableEq X] {L : Subgroup (FreeGroup X)}
-    (θ : FreeGroup X →* Multiplicative ℝ) (S : RightSchreierRepresentative L)
-    (hheight : ∀ w, value θ (S.representative w) = value θ w)
-    (P : ℝ → Prop) (z : RepresentativeSchreierSymbol S)
+    (θ : FreeGroup X →* Multiplicative ℝ) (S : Transversal L)
+    (hheight : ∀ w, value θ (S.rep w) = value θ w)
+    (P : ℝ → Prop) (z : S.Edge)
     (hz : z ∈ symbolsIn θ S P)
     (hfrom : PathIn (step θ) P 0 z.1.val.toWord)
-    (hto : PathIn (step θ) P 0 (S.representative (z.1.val * FreeGroup.of z.2)).toWord) :
+    (hto : PathIn (step θ) P 0 (S.rep (z.1.val * FreeGroup.of z.2)).toWord) :
     PathIn (step θ) P 0 (generatorWord S z) := by
   unfold generatorWord
   rw [pathIn_append_iff, pathIn_append_iff]

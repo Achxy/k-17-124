@@ -3,19 +3,20 @@ Authors: Achyuth Jayadevan
 Released under CC0 1.0 Universal; see LICENSE.
 -/
 import Kourovka.Halfspaces.SchreierHeights
+import Kourovka.Schreier.KernelPresentation
 
 /-!
 # Halfspace Relators
 
-Every relator of the actual augmented Schreier presentation is confined
+Every relator of the Schreier presentation is confined
 to one of the two overlapping halfspaces.
 -/
 
 namespace Kourovka.MetabelianEnumeration.SchreierHeights
 
 open HalfspaceGeometry
-open Kourovka.Schreier.Discrete
-open Kourovka.Schreier.Discrete.SchreierRewriting
+open Kourovka.Schreier
+open Kourovka.Schreier.Transversal
 
 variable {X Q : Type*} [CommGroup Q]
 
@@ -36,9 +37,9 @@ theorem pathIn_length_bound (f : X → ℝ) (D p : ℝ) (xs : List X)
       constructor <;> nlinarith
 
 theorem symbols_cover (π : FreeGroup X →* Q) (χ : Q →* Multiplicative ℝ)
-    (S : RightSchreierRepresentative π.ker) (D μ : ℝ)
+    (S : Transversal π.ker) (D μ : ℝ)
     (hD : ∀ x, |value (χ.comp π) (FreeGroup.of x)| ≤ D) (hμ : D ≤ μ)
-    (z : RepresentativeSchreierSymbol S) :
+    (z : S.Edge) :
     z ∈ symbolsIn (χ.comp π) S (fun x => 0 ≤ x) ∨
       z ∈ symbolsIn (χ.comp π) S (fun x => x ≤ μ) := by
   change (0 ≤ value (χ.comp π) z.1.val ∧ 0 ≤ value (χ.comp π)
@@ -54,23 +55,23 @@ theorem symbols_cover (π : FreeGroup X →* Q) (χ : Q →* Multiplicative ℝ)
     push_neg at h
     constructor <;> by_contra! hh <;> have := h (by linarith) <;> linarith
 
-/-- Short defining relators, degenerate edge relators, and normalized section
-relators all satisfy the same two-family presentation condition. -/
+/-- Lifted defining relators and section-path relators are each confined
+to one of the two overlapping halfspaces. -/
 theorem augmented_relators_one_side [DecidableEq X]
     (π : FreeGroup X →* Q) (χ : Q →* Multiplicative ℝ)
-    (S : RightSchreierRepresentative π.ker) (R : Set (FreeGroup X))
+    (S : Transversal π.ker) (R : Set (FreeGroup X))
     (D B μ : ℝ) (hD0 : 0 ≤ D) (hDB : D ≤ B) (hμ : 2 * B ≤ μ)
     (hD : ∀ x, |value (χ.comp π) (FreeGroup.of x)| ≤ D)
     (hR : ∀ r ∈ R, (r.toWord.length : ℝ) * D ≤ B)
-    (hsafe : ∀ t : representativeSet S,
+    (hsafe : ∀ t : S.vertices,
       PathIn (letterHeight fun x => value (χ.comp π) (FreeGroup.of x))
         (fun z => min 0 (value (χ.comp π) t.val) ≤ z ∧
           z ≤ max μ (value (χ.comp π) t.val)) 0 t.val.toWord)
-    (r : FreeGroup (RepresentativeSchreierSymbol S))
-    (hr : r ∈ representativeAugmentedPresentationRelators S R) :
+    (r : FreeGroup (S.Edge))
+    (hr : r ∈ S.relators R) :
     r ∈ Subgroup.closure (FreeGroup.of '' symbolsIn (χ.comp π) S (fun z => 0 ≤ z)) ∨
       r ∈ Subgroup.closure (FreeGroup.of '' symbolsIn (χ.comp π) S (fun z => z ≤ μ)) := by
-  rcases hr with (hr | hr) | hr
+  rcases hr with hr | hr
   · obtain ⟨t, w, hw, rfl⟩ := hr
     have hp := pathIn_length_bound
       (letterHeight fun x => value (χ.comp π) (FreeGroup.of x)) D
@@ -81,29 +82,30 @@ theorem augmented_relators_one_side [DecidableEq X]
     have hb := hR w hw
     by_cases hlo : B ≤ value (χ.comp π) t.val
     · left
+      rw [S.rewrite_eq_word]
       apply rewrite_mem_closure
       apply hp.mono
       intro z hz
       linarith [hz.1]
     · right
+      rw [S.rewrite_eq_word]
       apply rewrite_mem_closure
       apply hp.mono
       intro z hz
       linarith [hz.2]
-  · obtain ⟨t, x, _, rfl⟩ := hr
-    rcases symbols_cover π χ S D μ hD (by linarith) (t, x) with h | h
-    · exact Or.inl (Subgroup.subset_closure ⟨(t, x), h, rfl⟩)
-    · exact Or.inr (Subgroup.subset_closure ⟨(t, x), h, rfl⟩)
   · obtain ⟨t, rfl⟩ := hr
+    dsimp only
     have hp := hsafe t
     by_cases ht : 0 ≤ value (χ.comp π) t.val
     · left
+      rw [S.rewrite_eq_word]
       apply rewrite_mem_closure
       rw [value_one]
       apply hp.mono
       intro z hz
       simpa only [min_eq_left ht] using hz.1
     · right
+      rw [S.rewrite_eq_word]
       apply rewrite_mem_closure
       rw [value_one]
       apply hp.mono

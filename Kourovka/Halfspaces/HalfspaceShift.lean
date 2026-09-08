@@ -16,7 +16,7 @@ noncomputable section
 namespace Kourovka.MetabelianEnumeration.SchreierHeights
 
 open HalfspaceGeometry HalfspaceLoops
-open Kourovka.Schreier.Discrete.SchreierRewriting
+open Kourovka.Schreier.Transversal
 
 variable {X L : Type} [AddCommGroup L] [DecidableEq X]
 

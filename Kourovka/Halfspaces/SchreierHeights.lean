@@ -3,7 +3,7 @@ Authors: Achyuth Jayadevan
 Released under CC0 1.0 Universal; see LICENSE.
 -/
 import Kourovka.Halfspaces.HalfspaceGeometry
-import Kourovka.Schreier.Rewriting
+import Kourovka.Schreier.PathLifting
 
 /-!
 # Schreier Heights
@@ -16,8 +16,8 @@ noncomputable section
 namespace Kourovka.MetabelianEnumeration.SchreierHeights
 
 open HalfspaceGeometry
-open Kourovka.Schreier.Discrete
-open Kourovka.Schreier.Discrete.SchreierRewriting
+open Kourovka.Schreier
+open Kourovka.Schreier.Transversal
 
 variable {X Q : Type*} [CommGroup Q]
 
@@ -83,40 +83,40 @@ theorem exists_safe_section [DecidableEq X] (π : FreeGroup X →* Q)
 /-- Every normalized section defines the genuine Schreier representative
 system of the actual quotient kernel. -/
 def representativeOfSection (π : FreeGroup X →* Q) (r : Q → FreeGroup X)
-    (hr : ∀ q, π (r q) = q) (h1 : r 1 = 1) : RightSchreierRepresentative π.ker where
-  representative w := r (π w)
-  sameRightCoset w := by simp [MonoidHom.mem_ker, hr]
-  representative_eq_of_sameRightCoset := by
+    (hr : ∀ q, π (r q) = q) (h1 : r 1 = 1) : Transversal π.ker where
+  rep w := r (π w)
+  sameCoset w := by simp [MonoidHom.mem_ker, hr]
+  constantOnCosets := by
     intro g h hgh
     have heq : π g = π h := by
       apply mul_inv_eq_one.mp
       simpa [MonoidHom.mem_ker] using hgh
     rw [heq]
-  representative_one := by rw [map_one, h1]
+  rep_one := by rw [map_one, h1]
 
 theorem representative_height (π : FreeGroup X →* Q) (χ : Q →* Multiplicative ℝ)
-    (S : RightSchreierRepresentative π.ker) (w : FreeGroup X) :
-    value (χ.comp π) (S.representative w) = value (χ.comp π) w := by
-  have h := S.sameRightCoset w
-  have heq : π w = π (S.representative w) := by
+    (S : Transversal π.ker) (w : FreeGroup X) :
+    value (χ.comp π) (S.rep w) = value (χ.comp π) w := by
+  have h := S.sameCoset w
+  have heq : π w = π (S.rep w) := by
     apply mul_inv_eq_one.mp
     simpa [MonoidHom.mem_ker] using h
   simp only [value, MonoidHom.comp_apply, heq]
 
 /-- Schreier symbols whose two endpoint heights satisfy the given predicate. -/
 def symbolsIn (θ : FreeGroup X →* Multiplicative ℝ)
-    {L : Subgroup (FreeGroup X)} (S : RightSchreierRepresentative L) (P : ℝ → Prop) :
-    Set (RepresentativeSchreierSymbol S) :=
+    {L : Subgroup (FreeGroup X)} (S : Transversal L) (P : ℝ → Prop) :
+    Set (S.Edge) :=
   {z | P (value θ z.1.val) ∧ P (value θ (z.1.val * FreeGroup.of z.2))}
 
 /-- Rewriting a path confined to a height region uses only symbols of that
 region. This includes the literal negative-letter Schreier convention. -/
 theorem rewrite_mem_closure (π : FreeGroup X →* Q) (χ : Q →* Multiplicative ℝ)
-    (S : RightSchreierRepresentative π.ker) (P : ℝ → Prop)
+    (S : Transversal π.ker) (P : ℝ → Prop)
     (p : FreeGroup X) (xs : List (X × Bool))
     (hpath : PathIn (letterHeight fun x => value (χ.comp π) (FreeGroup.of x)) P
       (value (χ.comp π) p) xs) :
-    representativeTauList S p xs ∈
+    S.rewriteWord p xs ∈
       Subgroup.closure (FreeGroup.of '' symbolsIn (χ.comp π) S P) := by
   induction xs generalizing p with
   | nil => exact Subgroup.one_mem _
@@ -126,25 +126,25 @@ theorem rewrite_mem_closure (π : FreeGroup X →* Q) (χ : Q →* Multiplicativ
     · apply Subgroup.mul_mem
       · apply Subgroup.inv_mem
         apply Subgroup.subset_closure
-        refine ⟨representativeLabel S (p * (FreeGroup.of x)⁻¹) x, ?_, rfl⟩
-        change P (value (χ.comp π) (S.representative (p * (FreeGroup.of x)⁻¹))) ∧ _
+        refine ⟨S.edge (p * (FreeGroup.of x)⁻¹) x, ?_, rfl⟩
+        change P (value (χ.comp π) (S.rep (p * (FreeGroup.of x)⁻¹))) ∧ _
         rw [representative_height]
         constructor
         · simpa only [value_mul, value_inv, letterHeight, Bool.false_eq_true, if_false] using
             hpath.2.start
-        · simpa only [representativeLabel, value_mul, representative_height, value_inv,
+        · simpa only [edge, value_mul, representative_height, value_inv,
           neg_add_cancel_right] using
             hpath.1
       · apply ih
         simpa only [value_mul, value_inv, letterHeight, Bool.false_eq_true, if_false] using hpath.2
     · apply Subgroup.mul_mem
       · apply Subgroup.subset_closure
-        refine ⟨representativeLabel S p x, ?_, rfl⟩
-        change P (value (χ.comp π) (S.representative p)) ∧ _
+        refine ⟨S.edge p x, ?_, rfl⟩
+        change P (value (χ.comp π) (S.rep p)) ∧ _
         rw [representative_height]
         constructor
         · exact hpath.1
-        · simpa only [representativeLabel, value_mul, representative_height, letterHeight, if_true] using hpath.2.start
+        · simpa only [edge, value_mul, representative_height, letterHeight, if_true] using hpath.2.start
       · apply ih
         simpa only [value_mul, letterHeight, if_true] using hpath.2
 

@@ -317,26 +317,6 @@
       "source_sha256": "ccd9416513504b48a237a1daee0f73ddad7d2edd86931d40061ddd54541e9bea"
     },
     {
-      "source": "Kourovka/Schreier/RelatorBasic.lean",
-      "destination": "Kourovka/Schreier/RelatorBasic.lean",
-      "source_sha256": "31bcdbc651c68012cbad51b88400f1a2c36223fb5184076c4b8fd7d6b769bf46"
-    },
-    {
-      "source": "Kourovka/Schreier/RelatorCongruence.lean",
-      "destination": "Kourovka/Schreier/RelatorCongruence.lean",
-      "source_sha256": "9a5108d73a9ed9f6f73a2f1c111c63306b4bdf8362e52963d8bdf10dec7f5738"
-    },
-    {
-      "source": "Kourovka/Schreier/RelatorOperations.lean",
-      "destination": "Kourovka/Schreier/RelatorOperations.lean",
-      "source_sha256": "f6d71cb5761bacf0cd1bc0c684a14ba6ffcf12509a3dbfb6dc14d4fb858f7ff1"
-    },
-    {
-      "source": "Kourovka/Schreier/Rewriting.lean",
-      "destination": "Kourovka/Schreier/Rewriting.lean",
-      "source_sha256": "b909cfb30c000fa5284b619530e6b1b0a1d16296ef18b29f36adb52c32139efa"
-    },
-    {
       "source": "Kourovka/SchreierHeights.lean",
       "destination": "Kourovka/Halfspaces/SchreierHeights.lean",
       "source_sha256": "f0c42d6a9113634a4c92c3ef013920fd84a1b1949618410d981a6199aaa3d4a2"
@@ -376,5 +356,35 @@
       "destination": "Kourovka/Certificates/WordCertificates.lean",
       "source_sha256": "db4b562ad0e2fbfe68d06087736d9ac9ab12b1e317ee9dbd09d13beff44c4fb8"
     }
-  ]
+  ],
+  "replaced_sources": {
+    "description": "Historical imported files, replaced by the new Schreier implementation; these paths are no longer distributed.",
+    "original_files": [
+      {
+        "source": "Kourovka/Schreier/RelatorBasic.lean",
+        "destination": "Kourovka/Schreier/RelatorBasic.lean",
+        "source_sha256": "31bcdbc651c68012cbad51b88400f1a2c36223fb5184076c4b8fd7d6b769bf46"
+      },
+      {
+        "source": "Kourovka/Schreier/RelatorCongruence.lean",
+        "destination": "Kourovka/Schreier/RelatorCongruence.lean",
+        "source_sha256": "9a5108d73a9ed9f6f73a2f1c111c63306b4bdf8362e52963d8bdf10dec7f5738"
+      },
+      {
+        "source": "Kourovka/Schreier/RelatorOperations.lean",
+        "destination": "Kourovka/Schreier/RelatorOperations.lean",
+        "source_sha256": "f6d71cb5761bacf0cd1bc0c684a14ba6ffcf12509a3dbfb6dc14d4fb858f7ff1"
+      },
+      {
+        "source": "Kourovka/Schreier/Rewriting.lean",
+        "destination": "Kourovka/Schreier/Rewriting.lean",
+        "source_sha256": "b909cfb30c000fa5284b619530e6b1b0a1d16296ef18b29f36adb52c32139efa"
+      }
+    ],
+    "replacement_files": [
+      "Kourovka/Schreier/Transversal.lean",
+      "Kourovka/Schreier/PathLifting.lean",
+      "Kourovka/Schreier/KernelPresentation.lean"
+    ]
+  }
 }

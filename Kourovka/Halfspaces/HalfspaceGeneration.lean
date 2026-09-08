@@ -17,8 +17,8 @@ noncomputable section
 namespace Kourovka.MetabelianEnumeration.SchreierHeights
 
 open HalfspaceGeometry HalfspaceSplitting HalfspaceLoops
-open Kourovka.Schreier.Discrete
-open Kourovka.Schreier.Discrete.SchreierRewriting
+open Kourovka.Schreier
+open Kourovka.Schreier.Transversal
 
 variable {X L : Type} [AddCommGroup L] [DecidableEq X]
 
@@ -37,12 +37,12 @@ theorem transfer_generation {G H : Type*} [Group G] [Group H]
 
 theorem halfspace_generation_of_section (R : Set (FreeGroup X))
     (π : PresentedGroup R →* Multiplicative L) (χ : L →+ ℝ)
-    (S : RightSchreierRepresentative (preKernel R π))
+    (S : Transversal (preKernel R π))
     (D B μ : ℝ) (hD0 : 0 ≤ D) (hDB : D ≤ B) (hμ : 2 * B ≤ μ)
     (hD : ∀ x, |value (χ.toMultiplicative.comp (π.comp (PresentedGroup.mk R)))
       (FreeGroup.of x)| ≤ D)
     (hR : ∀ r ∈ R, (r.toWord.length : ℝ) * D ≤ B)
-    (hsafe : ∀ t : representativeSet S,
+    (hsafe : ∀ t : S.vertices,
       PathIn (step (χ.toMultiplicative.comp (π.comp (PresentedGroup.mk R))))
         (fun z => min 0 (value (χ.toMultiplicative.comp (π.comp (PresentedGroup.mk R))) t.val) ≤ z ∧
           z ≤ max μ (value (χ.toMultiplicative.comp (π.comp (PresentedGroup.mk R))) t.val))
@@ -53,23 +53,23 @@ theorem halfspace_generation_of_section (R : Set (FreeGroup X))
   let π₀ := π.comp (PresentedGroup.mk R)
   let θ := χ.toMultiplicative.comp π₀
   let e := schreierKernelEquiv R π S
-  have hh (w : FreeGroup X) : value θ (S.representative w) = value θ w :=
+  have hh (w : FreeGroup X) : value θ (S.rep w) = value θ w :=
     representative_height π₀ χ.toMultiplicative S w
-  have hab : ∀ a b : PresentedGroup (representativeAugmentedPresentationRelators S R),
+  have hab : ∀ a b : PresentedGroup (S.relators R),
       Commute a b := by
     intro a b
     apply (commute_map_iff e.injective).mp
     exact habelian (e a) (e b)
   have hsplit := abelian_presentation_one_side_generates
-    (representativeAugmentedPresentationRelators S R)
+    (S.relators R)
     (symbolsIn θ S (fun z => 0 ≤ z)) (symbolsIn θ S (fun z => z ≤ μ))
     (symbols_cover π₀ χ.toMultiplicative S D μ hD (by linarith))
     (augmented_relators_one_side π₀ χ.toMultiplicative S R D B μ hD0 hDB hμ hD hR hsafe) hab
   have htransfer (P : ℝ → Prop)
-      (hP : ∀ t : representativeSet S, P (value θ t.val) →
+      (hP : ∀ t : S.vertices, P (value θ t.val) →
         PathIn (step θ) P 0 t.val.toWord)
       (hgen : Subgroup.closure (PresentedGroup.of '' symbolsIn θ S P :
-        Set (PresentedGroup (representativeAugmentedPresentationRelators S R))) = ⊤) :
+        Set (PresentedGroup (S.relators R))) = ⊤) :
       Subgroup.closure (loopSet π χ PresentedGroup.of P) = ⊤ := by
     apply transfer_generation e _ _ hgen
     rintro _ ⟨z, hz, rfl⟩
@@ -81,7 +81,7 @@ theorem halfspace_generation_of_section (R : Set (FreeGroup X))
       exact (schreierKernelEquiv_of R π S z).symm
     · change PathIn (step θ) P 0 (generatorWord S z)
       apply generatorWord_path θ S hh P z hz (hP z.1 hz'.1)
-      apply hP ⟨S.representative (z.1.val * FreeGroup.of z.2), ⟨_, rfl⟩⟩
+      apply hP ⟨S.rep (z.1.val * FreeGroup.of z.2), ⟨_, rfl⟩⟩
       simpa only [hh] using hz'.2
   rcases hsplit with h | h
   · left
@@ -133,7 +133,7 @@ theorem finite_presentation_halfspace_generation [Fintype X]
   obtain ⟨r, hr, h1, hp⟩ := exists_safe_section π₀
     (hπ.comp (PresentedGroup.mk_surjective R)) χ.toMultiplicative D μ hD0 hD (by dsimp [μ]; linarith)
   let S := representativeOfSection π₀ r hr h1
-  have hsafe : ∀ t : representativeSet S,
+  have hsafe : ∀ t : S.vertices,
       PathIn (step θ) (fun z => min 0 (value θ t.val) ≤ z ∧ z ≤ max μ (value θ t.val))
         0 t.val.toWord := by
     rintro ⟨_, ⟨w, rfl⟩⟩

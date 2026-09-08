@@ -7,7 +7,7 @@ import Kourovka.Halfspaces.HalfspaceRelators
 /-!
 # Schreier Kernel
 
-The augmented Schreier presentation is a presentation of the actual kernel
+The Schreier presentation is a presentation of the actual kernel
 inside the original ordinary presented group.
 -/
 
@@ -16,8 +16,8 @@ noncomputable section
 namespace Kourovka.MetabelianEnumeration.SchreierHeights
 
 open HalfspaceGeometry
-open Kourovka.Schreier.Discrete
-open Kourovka.Schreier.Discrete.SchreierRewriting
+open Kourovka.Schreier
+open Kourovka.Schreier.Transversal
 
 variable {X Q : Type*} [Group Q] (R : Set (FreeGroup X))
   (π : PresentedGroup R →* Q)
@@ -53,22 +53,16 @@ theorem normalClosure_le_preKernel : Subgroup.normalClosure R ≤ preKernel R π
   change π (PresentedGroup.mk R w) = 1
   rw [PresentedGroup.one_of_mem hw, map_one]
 
-variable [DecidableEq X]
-
-def schreierKernelEquiv (S : RightSchreierRepresentative (preKernel R π)) :
-    PresentedGroup (representativeAugmentedPresentationRelators S R) ≃* π.ker :=
-  (representativeAugmentedPresentedGroupEquiv (S := S) (normalClosure_le_preKernel R π)).trans
+def schreierKernelEquiv (S : Transversal (preKernel R π)) :
+    PresentedGroup (S.relators R) ≃* π.ker :=
+  (S.presentationEquiv R (normalClosure_le_preKernel R π)).trans
     (kernelQuotientEquiv R π)
 
-@[simp] theorem schreierKernelEquiv_of (S : RightSchreierRepresentative (preKernel R π))
-    (z : RepresentativeSchreierSymbol S) :
+@[simp] theorem schreierKernelEquiv_of (S : Transversal (preKernel R π))
+    (z : S.Edge) :
     (schreierKernelEquiv R π S (PresentedGroup.of z)).val =
-      PresentedGroup.mk R (representativeSymbolEval S z) := by
-  simp [schreierKernelEquiv, representativeAugmentedPresentedGroupEquiv,
-    representativeAugmentedPresentationQuotientEquiv,
-    representativeSymbolEvalAugmentedPresentationQuotientHom, kernelQuotientEquiv,
-    kernelMap, PresentedGroup.of, PresentedGroup.mk,
-    QuotientGroup.quotientKerEquivOfSurjective, QuotientGroup.quotientKerEquivOfRightInverse,
-    QuotientGroup.coe_mk', representativeSymbolEvalSubgroupHom]
+      PresentedGroup.mk R (S.edgeValue z) := by
+  simp [schreierKernelEquiv, kernelQuotientEquiv, kernelMap,
+    QuotientGroup.quotientKerEquivOfSurjective, QuotientGroup.quotientKerEquivOfRightInverse]
 
 end Kourovka.MetabelianEnumeration.SchreierHeights

@@ -8,5 +8,6 @@
   "Modules": "LaurentAction CommutatorModule FiniteModuleGenerators ValuationModule TamenessCompactness SignedTameness ModuleRealization",
   "Halfspaces": "HalfspaceGeometry HalfspaceGeneration HalfspaceRelators HalfspaceSplitting HalfspaceShift HalfspaceModule HalfspaceLoopModule HalfspaceLoops SchreierHeights SchreierKernel SchreierPaths BieriStrebelNecessity",
   "Cofinality": "CofinalCover LatticePullback CofinalRealization Cofinality",
-  "Enumeration": "ComputableEnumeration EnumerationCofinality EnumerationCorrectness EpimorphismEnumeration Main"
+  "Enumeration": "ComputableEnumeration EnumerationCofinality EnumerationCorrectness EpimorphismEnumeration Main",
+  "Schreier": "Transversal PathLifting KernelPresentation"
 }

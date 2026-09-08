@@ -1,6 +1,6 @@
-# ProCGroups Schreier presentation source
+# Historical ProCGroups Schreier source attribution
 
-The four files in `Kourovka/Schreier` are adapted from
+The initial export included four files in `Kourovka/Schreier` adapted from
 [ProCGroups](https://github.com/n-yamaguchi-0729/ProCGroups/tree/6933dfe3f376833421ce10e782108b95ac84bda5),
 commit `6933dfe3f376833421ce10e782108b95ac84bda5` (Apache License 2.0).
 The license is preserved in `ProCGroups-LICENSE`. Upstream contains no NOTICE file.
@@ -10,10 +10,14 @@ Original base path: `Lean4/ProCGroups/ReidemeisterSchreier/Discrete/`.
 `Presentations/Relators/Basic.lean`, `Congruence.lean`, `Operations.lean`;
 `rewriting` is `ReidemeisterSchreier/Rewriting.lean`.
 
-Module imports and declaration namespaces are local to this standalone package.
-Compatibility adaptations target the package's pinned Lean 4.24/Mathlib 4.24.
-No external dependency or compiled artifact has been imported.
-These sources are included in the ordinary build and transitive axiom audit.
+In that export, module imports and declaration namespaces were local to this
+standalone package, and compatibility adaptations targeted Lean 4.24/Mathlib 4.24.
+The adapted sources were included in its ordinary build and transitive axiom audit.
+
+Those four proof modules have since been replaced by the implementation described
+in [source provenance](../docs/provenance.md). The table below and the accompanying
+licence preserve the historical attribution. The former code remains in Git
+history at commit `5627cc84341985db2708f408cc80203fba33fdd8`.
 
 | Local file | Original source key | SHA-256 of original source bytes |
 | --- | --- | --- |

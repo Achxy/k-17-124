@@ -1,36 +1,42 @@
 # Source provenance
 
-The proof was reorganised from the pinned Lean companion to the paper
-*Finite presentations of metabelian groups: effective enumeration via Laurent
-relations*. The original companion's 81-file checksum manifest was verified
-before exporting its 75 proof modules.
+The initial export came from the pinned Lean companion to *Finite presentations
+of metabelian groups: effective enumeration via Laurent relations*. Its 81-file
+checksum manifest was verified before the 75 proof modules were imported.
 
-`source-map.json` records each original path and SHA-256 digest alongside its
-new path. The reorganisation groups modules by mathematical topic, preserves
-existing public namespaces, adds module and declaration documentation, and
-adds `Kourovka/Paper.lean` as the principal reading entry point. Source hashes in
-that map describe the original snapshot, not the edited files in this repository.
-The cleanup also removes redundant simplification arguments and tactics,
-uses clearer local names, and drops unused typeclass assumptions from helper
-lemmas. The assembled mathematical targets are unchanged. The new checkout
-is built and audited separately.
+`source-map.json` records the original paths and SHA-256 digests of the retained
+sources. These digests describe the original snapshot, not subsequent edits.
+The files are grouped by mathematical topic. The complete enumeration targets
+are checked separately in `Tests/Completion.lean`.
 
-The alternative isomorphism-based enumeration proof remains available.
-Boundary examples are in `Tests`, and the proof library does not import them.
-No original proof module has been discarded.
+## Schreier implementation
 
-## Third-party code
+The current Schreier proof is implemented in three modules:
 
-`Kourovka/Schreier` contains four adapted files from ProCGroups at commit
-`6933dfe3f376833421ce10e782108b95ac84bda5`. Their existing headers, detailed
-provenance and Apache-2.0 licence are retained in `third_party`. Those licence
-terms are separate from the repository's existing CC0 dedication.
+- [Transversal](../Kourovka/Schreier/Transversal.lean): normalized coset sections and edges.
+- [PathLifting](../Kourovka/Schreier/PathLifting.lean): group-valued path lifting,
+  free-reduction invariance, the cocycle identity, and evaluation.
+- [KernelPresentation](../Kourovka/Schreier/KernelPresentation.lean): inverse
+  homomorphisms between the Schreier presentation and the subgroup relator quotient.
+
+The implementation uses Mathlib's free-group and quotient-group APIs.
+Its presentation has two relator families: lifts of original relators and
+section-path relations. An arbitrary normalized transversal suffices.
+
+These modules replace the four files initially adapted from ProCGroups.
+The adapted proof modules are no longer included or imported. The historical
+licence and attribution records remain in `third_party`; they are documentation,
+not a Lean dependency. Original source records are retained under
+`replaced_sources` in `source-map.json`; the earlier
+code and its attribution remain in Git history at commit
+`5627cc84341985db2708f408cc80203fba33fdd8`.
+
+## Dependencies and distribution
 
 Mathlib and its dependencies are obtained through Lake at the revisions in
-`lake-manifest.json`; they are not vendored here.
+`lake-manifest.json`; they are not vendored here. The repository's code is
+covered by its existing CC0 dedication.
 
-## Scope of this repository
-
-This repository contains the proof library, examples, and its documentation.
-The manuscript's design assets, working drafts, research downloads and local
-build logs are not part of the proof distribution.
+Both enumeration proofs and the boundary examples remain included. The proof
+library does not import the examples. Manuscript assets, working drafts,
+research downloads and build logs are outside the proof distribution.

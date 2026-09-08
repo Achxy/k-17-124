@@ -217,7 +217,5 @@ See [verification](docs/verification.md) for the precise checks.
 
 ## Attribution
 
-The original work is covered by [CC0](LICENSE). The currently adapted Schreier
-sources retain their Apache-2.0 terms and
-[attribution](third_party/ProCGroups-PROVENANCE.md).
-Citation metadata is in [CITATION.cff](CITATION.cff).
+The code is covered by [CC0](LICENSE). Source history is recorded in
+[provenance](docs/provenance.md).
