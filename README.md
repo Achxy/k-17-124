@@ -21,7 +21,7 @@ $(i,\mathrm{false})$ denotes $x_i^{-1}$. Indices start at zero. In
 ```math
 \begin{aligned}
 \mathrm{WF}(P)
-&\iff \forall w\in R\;\forall(i,\varepsilon)\in w,\quad i<n,\\
+&\iff \forall w\in R\;\forall(i,\varepsilon)\in w,\quad i\lt n,\\
 G(P)
 &=F(x_0,\ldots,x_{n-1})\big/\langle\!\langle
 \mathrm{interpretWord}_n(R)\rangle\!\rangle.
@@ -131,8 +131,8 @@ Its relators are
 
 ```math
 \begin{aligned}
-\left[t_i,t_j\right]_{\mathrm r}&=z_{A(i,j)} &&(i<j),\\
-\left[z_i,z_j^{q(v)}\right]_{\mathrm r}&=1 &&(\|v\|_2^2<\rho^2),\\
+\left[t_i,t_j\right]_{\mathrm r}&=z_{A(i,j)} &&(i\lt j),\\
+\left[z_i,z_j^{q(v)}\right]_{\mathrm r}&=1 &&(\|v\|_2^2\lt \rho^2),\\
 z_i&=\prod_{(u,c)\in\lambda}(z_i^c)^{q(u)}
 && (\lambda\text{ signed }+),\\
 z_i&=\prod_{(u,c)\in\lambda}(z_i^c)^{q(u)^{-1}}
