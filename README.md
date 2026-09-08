@@ -10,7 +10,7 @@ The input type is
 
 ```math
 \mathcal P=\mathbb N\times
-\operatorname{List}\bigl(\operatorname{List}(\mathbb N\times\operatorname{Bool})\bigr).
+\mathrm{List}\bigl(\mathrm{List}(\mathbb N\times\mathrm{Bool})\bigr).
 ```
 
 An element $P=(n,R)$ specifies $n$ generators and a finite list of relator
@@ -20,11 +20,11 @@ $(i,\mathrm{false})$ denotes $x_i^{-1}$. Indices start at zero. In
 
 ```math
 \begin{aligned}
-\operatorname{WF}(P)
+\mathrm{WF}(P)
 &\iff \forall w\in R\;\forall(i,\varepsilon)\in w,\quad i<n,\\
 G(P)
 &=F(x_0,\ldots,x_{n-1})\big/\langle\!\langle
-\operatorname{interpretWord}_n(R)\rangle\!\rangle.
+\mathrm{interpretWord}_n(R)\rangle\!\rangle.
 \end{aligned}
 ```
 
@@ -36,19 +36,19 @@ accepted presentations.
 The natural-number decoder $d:\mathbb N\to\mathcal P$ satisfies
 
 ```math
-d(\operatorname{encode}(P))=P.
+d(\mathrm{encode}(P))=P.
 ```
 
 It is total: a failed decode returns $(0,[])$, the empty presentation of the
 trivial group. Successfully decoded presentations must still satisfy
-$\operatorname{WF}$.
+$\mathrm{WF}$.
 
 ## The theorem checked by Lean
 
 The group property is the identity
 
 ```math
-\operatorname{Met}(G)
+\mathrm{Met}(G)
 \iff
 \forall a,b,c,d\in G,\quad
 [a,b][c,d]=[c,d][a,b],
@@ -59,13 +59,13 @@ Define
 
 ```math
 \mathcal M=\{m\in\mathbb N:
-\operatorname{WF}(d(m))\ \land\ \operatorname{Met}(G(d(m)))\}.
+\mathrm{WF}(d(m))\ \land\ \mathrm{Met}(G(d(m)))\}.
 ```
 
 The formalisation constructs a primitive-recursive Boolean predicate
 
 ```math
-V:\mathbb N\times\mathbb N\longrightarrow\operatorname{Bool}
+V:\mathbb N\times\mathbb N\longrightarrow\mathrm{Bool}
 ```
 
 and proves
@@ -131,8 +131,8 @@ Its relators are
 
 ```math
 \begin{aligned}
-[t_i,t_j]_{\mathrm r}&=z_{A(i,j)} &&(i<j),\\
-[z_i,z_j^{q(v)}]_{\mathrm r}&=1 &&(\|v\|_2^2<\rho^2),\\
+\left[t_i,t_j\right]_{\mathrm r}&=z_{A(i,j)} &&(i<j),\\
+\left[z_i,z_j^{q(v)}\right]_{\mathrm r}&=1 &&(\|v\|_2^2<\rho^2),\\
 z_i&=\prod_{(u,c)\in\lambda}(z_i^c)^{q(u)}
 && (\lambda\text{ signed }+),\\
 z_i&=\prod_{(u,c)\in\lambda}(z_i^c)^{q(u)^{-1}}
@@ -149,15 +149,14 @@ $E(Q,P,e)$ the Boolean epimorphism check. The structured predicate is
 
 ```math
 \begin{aligned}
-\operatorname{checkData}(P,((\mathcal D,r),e))
-={}&\operatorname{WF}(P)\ \land\\
-&\bigl(n=0\ \lor\
-(C(\mathcal D,r)\land E(Q_{\mathcal D,\rho(\mathcal D,r)},P,e))\bigr),
+\mathrm{checkData}(P,((\mathcal D,r),e))
+&=\mathrm{WF}(P)\land(n=0\lor B),\\
+B&=C(\mathcal D,r)\land E(Q_{\mathcal D,\rho(\mathcal D,r)},P,e).
 \end{aligned}
 ```
 
 where propositions on the right are evaluated as Booleans. Finally,
-$V(m,c)=\operatorname{checkData}(d(m),\operatorname{decodeCertificate}(c))$.
+$V(m,c)=\mathrm{checkData}(d(m),\mathrm{decodeCertificate}(c))$.
 These are the definitions `checkData` and `check` in
 [EpimorphismEnumeration.lean](Kourovka/Enumeration/EpimorphismEnumeration.lean).
 
@@ -168,7 +167,7 @@ These are the definitions `checkData` and `check` in
 ```math
 C(\mathcal D,r)=\mathrm{true}
 \quad\Longrightarrow\quad
-\operatorname{Met}(G(Q_{\mathcal D,\rho(\mathcal D,r)})).
+\mathrm{Met}(G(Q_{\mathcal D,\rho(\mathcal D,r)})).
 ```
 
 [CoverSoundness.lean](Kourovka/Covers/CoverSoundness.lean) proves this by
@@ -184,9 +183,9 @@ statement, and extracts finitely many signed relations. Cone-margin existence
 and finite epimorphism certificates then give
 
 ```math
-\operatorname{WF}(P)\land\operatorname{Met}(G(P))
+\mathrm{WF}(P)\land\mathrm{Met}(G(P))
 \quad\Longrightarrow\quad
-\exists c,\quad\operatorname{checkData}(P,c)=\mathrm{true}.
+\exists c,\quad\mathrm{checkData}(P,c)=\mathrm{true}.
 ```
 
 **Effectivity.** Rational Fourier–Motzkin elimination, the integer radius,
