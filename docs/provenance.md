@@ -24,11 +24,9 @@ Its presentation has two relator families: lifts of original relators and
 section-path relations. An arbitrary normalized transversal suffices.
 
 These modules replace the four files initially adapted from ProCGroups.
-The adapted proof modules are no longer included or imported. The historical
-licence and attribution records remain in `third_party`; they are documentation,
-not a Lean dependency. Original source records are retained under
-`replaced_sources` in `source-map.json`; the earlier
-code and its attribution remain in Git history at commit
+The adapted proof modules are no longer included or imported. Original source
+records are retained under `replaced_sources` in `source-map.json`. The former
+code, licence and attribution remain in Git history at commit
 `5627cc84341985db2708f408cc80203fba33fdd8`.
 
 ## Dependencies and distribution

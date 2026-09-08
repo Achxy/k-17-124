@@ -195,8 +195,33 @@ free reduction. Thus checking a fixed certificate always terminates; searching
 for one terminates exactly on $\mathcal M$. The final step uses `Nat.rfind`
 in [Enumeration.lean](Kourovka/Computability/Enumeration.lean).
 
-The [statement correspondence](docs/paper-map.md) records the declarations
-for the individual results in the paper.
+<details>
+<summary>Correspondence with statements in the paper</summary>
+
+Each link identifies the Lean declaration with its full hypotheses and proof.
+The correspondence with the article is by inspection; the Lean kernel checks
+the formal declarations.
+
+| Paper statement | Lean declarations |
+| --- | --- |
+| The certificate theorem | [check_primrec](Kourovka/Enumeration/EpimorphismEnumeration.lean#L86)<br>[check_correct](Kourovka/Enumeration/EpimorphismEnumeration.lean#L124)<br>[kourovka_17_124_via_epimorphisms](Kourovka/Enumeration/EpimorphismEnumeration.lean#L134) |
+| Collection and the derived subgroup | [collection_radius](Kourovka/Collection/CollectionRadius.lean#L144)<br>[collection_radius_inverse](Kourovka/Collection/CollectionRadius.lean#L179)<br>[normalClosure_abelian](Kourovka/Collection/Collection.lean#L257) |
+| Tameness and signed Laurent relations | [tame_of_finite_presentation](Kourovka/Halfspaces/BieriStrebelNecessity.lean#L121)<br>[finite_signed_centralizers](Kourovka/Modules/SignedTameness.lean#L61) |
+| Rational cone margins | [checkMargin_correct](Kourovka/Polyhedral/ConeVerifier.lean#L138)<br>[coneCheck_correct](Kourovka/Polyhedral/ConeVerifier.lean#L203)<br>[dyadic_margin_search_terminates](Kourovka/Polyhedral/ConeMargin.lean#L93)<br>[checkMargin_primrec](Kourovka/Polyhedral/ComputableCone.lean#L286)<br>[lower_constraint](Kourovka/Polyhedral/FourierMotzkin.lean#L101)<br>[upper_constraint](Kourovka/Polyhedral/FourierMotzkin.lean#L107)<br>[pair_constraint](Kourovka/Polyhedral/FourierMotzkin.lean#L113)<br>[elimination_step](Kourovka/Polyhedral/FourierMotzkin.lean#L150)<br>[rational_iff_real](Kourovka/Polyhedral/FourierMotzkin.lean#L231) |
+| The explicit radius | [radius_eq](Kourovka/Covers/ComputableCoverData.lean#L115)<br>[coneRadius_formula](Kourovka/Covers/ComputableCoverData.lean#L104)<br>[radius_primrec](Kourovka/Covers/ComputableCoverData.lean#L146) |
+| Radius reduction | [vector_radius_shrink](Kourovka/Polyhedral/Radius.lean#L32) |
+| Soundness of finite covers | [radius_step](Kourovka/Covers/CoverSoundness.lean#L45)<br>[all_ordered_commute](Kourovka/Covers/CoverSoundness.lean#L99)<br>[certified_cover_metabelian](Kourovka/Covers/CoverSoundness.lean#L263)<br>[checked_presentation_metabelian](Kourovka/Covers/ComputableCoverSemantics.lean#L197) |
+| Finite presentations of central extensions | [finite_presentation_of_central_extension](Kourovka/Presentations/CentralExtensionPresentation.lean#L20) |
+| Cofinality of finite covers | [finite_presentation_cover_cofinal](Kourovka/Cofinality/Cofinality.lean#L27)<br>[encoded_cover_cofinal](Kourovka/Enumeration/EnumerationCofinality.lean#L21) |
+| Finite epimorphism certificates | [checkEpi_correct](Kourovka/Certificates/EpimorphismSemantics.lean#L108)<br>[checkEpi_primrec](Kourovka/Certificates/ComputableEpimorphism.lean#L51) |
+| The enumeration predicate | [checkData](Kourovka/Enumeration/EpimorphismEnumeration.lean#L36)<br>[check](Kourovka/Enumeration/EpimorphismEnumeration.lean#L83) |
+
+The collection statements cover the ordered words $q(u)q(v)$ and
+$q(u)^{-1}q(v)^{-1}$. For Fourier–Motzkin elimination, subtract the margin
+$\gamma$ from the constant coefficient to obtain the convention
+$\mathrm{Row.eval}\leq 0$.
+
+</details>
 
 ## Reproducing the verification
 
@@ -213,9 +238,10 @@ Lean **4.24.0** and the full Mathlib dependency graph are pinned. The check
 builds both complete theorem routes and the examples, treats Lean warnings as
 failures, and audits transitive dependencies for additional axioms.
 The permitted axioms are `propext`, `Classical.choice`, and `Quot.sound`.
-See [verification](docs/verification.md) for the precise checks.
+[scripts/check.sh](scripts/check.sh) runs the layout check, Lean build, and
+[Audit.lean](Audit.lean). The audit traverses the proof dependencies of project
+declarations, including private declarations.
 
 ## Attribution
 
-The code is covered by [CC0](LICENSE). Source history is recorded in
-[provenance](docs/provenance.md).
+The code is covered by [CC0](LICENSE).

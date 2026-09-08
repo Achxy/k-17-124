@@ -23,7 +23,7 @@ from cofinality of the finite-cover family.
 * `Kourovka.Enumeration.EpimorphismEnumeration`: the checker and its correctness.
 * `Kourovka.Cofinality.Cofinality`: the geometric completeness argument.
 
-`docs/paper-map.md` links the remaining statements of the paper to their proofs.
+The root `README.md` links the remaining statements of the paper to their proofs.
 -/
 
 namespace Kourovka.MetabelianEnumeration.Paper
