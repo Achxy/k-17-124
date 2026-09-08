@@ -1,0 +1,380 @@
+{
+  "description": "Path map from the paper companion to the organised standalone proof; hashes refer to the checked source snapshot before reorganisation.",
+  "files": [
+    {
+      "source": "Kourovka/BieriStrebelNecessity.lean",
+      "destination": "Kourovka/Halfspaces/BieriStrebelNecessity.lean",
+      "source_sha256": "b51f8acbc40e6e074be0d189c2c98a5ea220523ad774a9dc3047137c39a04b9c"
+    },
+    {
+      "source": "Kourovka/CentralExtension.lean",
+      "destination": "Kourovka/Presentations/CentralExtension.lean",
+      "source_sha256": "bc15ea54b96bddf6e49a92c116f18a4f089dce1365f2b5fa9071612bffcbacff"
+    },
+    {
+      "source": "Kourovka/CentralExtensionPresentation.lean",
+      "destination": "Kourovka/Presentations/CentralExtensionPresentation.lean",
+      "source_sha256": "3b99a2562706caeeab628107272a2e69d210d60c70ca7909bd645a02bd7c2914"
+    },
+    {
+      "source": "Kourovka/CertifiedCover.lean",
+      "destination": "Kourovka/Covers/CertifiedCover.lean",
+      "source_sha256": "ef1b463e4e4504511364543c6bb9c0c353a08c54325649bb506b7d12276f0228"
+    },
+    {
+      "source": "Kourovka/CertifiedRadius.lean",
+      "destination": "Kourovka/Covers/CertifiedRadius.lean",
+      "source_sha256": "4216c4992151961e6c696b3c60f5798023674ab622e5fdd71748312198b197a2"
+    },
+    {
+      "source": "Kourovka/CofinalCover.lean",
+      "destination": "Kourovka/Cofinality/CofinalCover.lean",
+      "source_sha256": "c137d0ae2e56a925c95ae22a7af3970331ba286b4026ed2576582283ed46cdf6"
+    },
+    {
+      "source": "Kourovka/CofinalRealization.lean",
+      "destination": "Kourovka/Cofinality/CofinalRealization.lean",
+      "source_sha256": "e2e46a74052e39210f9605f56a5a5b441e80e0395be37b8310e0cded7f0b6f1d"
+    },
+    {
+      "source": "Kourovka/Cofinality.lean",
+      "destination": "Kourovka/Cofinality/Cofinality.lean",
+      "source_sha256": "d9f70df982c72657c6ed021c2621c333ea12e35f60f1892cbfdd35848f0fa098"
+    },
+    {
+      "source": "Kourovka/Collection.lean",
+      "destination": "Kourovka/Collection/Collection.lean",
+      "source_sha256": "678256ce34509f0f298d9059325479cd8765b935c859cac230152404e551b321"
+    },
+    {
+      "source": "Kourovka/CollectionFinite.lean",
+      "destination": "Kourovka/Collection/CollectionFinite.lean",
+      "source_sha256": "f4b36c078aa9fb4f87e75790f85e9a60394657280b62e24aead453926f60c84e"
+    },
+    {
+      "source": "Kourovka/CollectionGeometry.lean",
+      "destination": "Kourovka/Collection/CollectionGeometry.lean",
+      "source_sha256": "17f5e3d9da6d4b51f8b20863ef30c32d475b28020d6b0d133d58a0b1aee3f63a"
+    },
+    {
+      "source": "Kourovka/CollectionRadius.lean",
+      "destination": "Kourovka/Collection/CollectionRadius.lean",
+      "source_sha256": "5207b9ef8887f2c672075e6027994a40f73de04bae93c1c2b16871ac968639ac"
+    },
+    {
+      "source": "Kourovka/CommutatorModule.lean",
+      "destination": "Kourovka/Modules/CommutatorModule.lean",
+      "source_sha256": "0cda82fd1a4f2c312b3b677087e01cb538c476523be20868246bba4a858fda93"
+    },
+    {
+      "source": "Kourovka/ComputableClosure.lean",
+      "destination": "Kourovka/Computability/ComputableClosure.lean",
+      "source_sha256": "c668b2bb345d4a90cd1101e81a9b7fd8c4fe9d629801a437cd7c0b7347accba6"
+    },
+    {
+      "source": "Kourovka/ComputableCone.lean",
+      "destination": "Kourovka/Polyhedral/ComputableCone.lean",
+      "source_sha256": "c4e13f704dd406e777d5de1bfe2fa4fb7db8bc514729e89f31eb627120b0b5dd"
+    },
+    {
+      "source": "Kourovka/ComputableCoverBounds.lean",
+      "destination": "Kourovka/Covers/ComputableCoverBounds.lean",
+      "source_sha256": "41740733d3cc884828ba0a69f6a3cb1197d6d7a14e91b4e2163fc4003d4b56eb"
+    },
+    {
+      "source": "Kourovka/ComputableCoverData.lean",
+      "destination": "Kourovka/Covers/ComputableCoverData.lean",
+      "source_sha256": "80ddbc1a5646ebe7033a5ee77d2aa8a3e2d01a5f5210ec7e9ee122d79c4af96b"
+    },
+    {
+      "source": "Kourovka/ComputableCoverSemantics.lean",
+      "destination": "Kourovka/Covers/ComputableCoverSemantics.lean",
+      "source_sha256": "563db8c52736a1261b2e136f752cbae80616dd1fa6fd3e2b4bb8394e7061b5de"
+    },
+    {
+      "source": "Kourovka/ComputableCoverWords.lean",
+      "destination": "Kourovka/Covers/ComputableCoverWords.lean",
+      "source_sha256": "81f5fa6886c6b61e083e3affeb29a2cdbc535f30913590180a459e707b126140"
+    },
+    {
+      "source": "Kourovka/ComputableEnumeration.lean",
+      "destination": "Kourovka/Enumeration/ComputableEnumeration.lean",
+      "source_sha256": "974fd917acb9868836c1060eb3e8134d756aaab5c60fca27ad621bd040e3bcb9"
+    },
+    {
+      "source": "Kourovka/ComputableEpimorphism.lean",
+      "destination": "Kourovka/Certificates/ComputableEpimorphism.lean",
+      "source_sha256": "6a5228a0b8d18c65dc9e50cf778859160eaa3d4728bcf294c813a7bf2f3e55ac"
+    },
+    {
+      "source": "Kourovka/ComputableFourierMotzkin.lean",
+      "destination": "Kourovka/Polyhedral/ComputableFourierMotzkin.lean",
+      "source_sha256": "ca0eefef3a53201e752fda38eec21ce91b1ba9f2d1ac237d49e3293c1d7bc357"
+    },
+    {
+      "source": "Kourovka/ComputableIntegers.lean",
+      "destination": "Kourovka/Computability/ComputableIntegers.lean",
+      "source_sha256": "36fcf3b7c539b8d88c009b9be0cfe230bccdc43b9d0fe348ba13f5d646a818c4"
+    },
+    {
+      "source": "Kourovka/ComputableIsomorphism.lean",
+      "destination": "Kourovka/Certificates/ComputableIsomorphism.lean",
+      "source_sha256": "7d5efd0f4f37beed775fc3eb1c9c0a6cfd620be51a96948ff744e78bc485f890"
+    },
+    {
+      "source": "Kourovka/ComputableLatticeBall.lean",
+      "destination": "Kourovka/Covers/ComputableLatticeBall.lean",
+      "source_sha256": "08b8778747c11700bb033431e9d96826c2631c5ca87a84932ff643dca235e74a"
+    },
+    {
+      "source": "Kourovka/ComputablePresentations.lean",
+      "destination": "Kourovka/Computability/ComputablePresentations.lean",
+      "source_sha256": "b2433905d6f73232c697d98f3e5c9b31c1593807bfb2d2ed2f5f20e85567c5dd"
+    },
+    {
+      "source": "Kourovka/ComputableWords.lean",
+      "destination": "Kourovka/Computability/ComputableWords.lean",
+      "source_sha256": "4d6053565ec2192ea92bcc92a1ffa77c564cab22d8778da02791354d246e002a"
+    },
+    {
+      "source": "Kourovka/ConeMargin.lean",
+      "destination": "Kourovka/Polyhedral/ConeMargin.lean",
+      "source_sha256": "6e8756d95c805a599d22f2612c3c19042ae07816702662c1c64e6d72550dde2b"
+    },
+    {
+      "source": "Kourovka/ConeVerifier.lean",
+      "destination": "Kourovka/Polyhedral/ConeVerifier.lean",
+      "source_sha256": "1b2660fd082d855211de270d47d9e1e322e6e8af8e2b1192eb598c0e27db718a"
+    },
+    {
+      "source": "Kourovka/CoverMargin.lean",
+      "destination": "Kourovka/Covers/CoverMargin.lean",
+      "source_sha256": "d8ae6c5baa9749e9aa1625f07f7fbe940a8be53c12318e979c590184eb0650ed"
+    },
+    {
+      "source": "Kourovka/CoverSoundness.lean",
+      "destination": "Kourovka/Covers/CoverSoundness.lean",
+      "source_sha256": "ef44f694e17d8c830d52829d821f96bb730754fb918c4d6033e4383f95d64a3e"
+    },
+    {
+      "source": "Kourovka/Enumeration.lean",
+      "destination": "Kourovka/Computability/Enumeration.lean",
+      "source_sha256": "a253d02e6b543d174775655cddaf615bbc33523da9d86d7a278cdad69d30c043"
+    },
+    {
+      "source": "Kourovka/EnumerationCofinality.lean",
+      "destination": "Kourovka/Enumeration/EnumerationCofinality.lean",
+      "source_sha256": "5e510c1386a9c2dd10d1762ec00296c5c05f8436f1a2140cd41f63f7a8728840"
+    },
+    {
+      "source": "Kourovka/EnumerationCorrectness.lean",
+      "destination": "Kourovka/Enumeration/EnumerationCorrectness.lean",
+      "source_sha256": "0cac7902c582b08ae4b13107227d512df4f28ee3164386164465d5514fd69c22"
+    },
+    {
+      "source": "Kourovka/EpimorphismEnumeration.lean",
+      "destination": "Kourovka/Enumeration/EpimorphismEnumeration.lean",
+      "source_sha256": "1a22a49694433f89a2ce29ce309169510622f9786344f4b62429e61f4b4f2e71"
+    },
+    {
+      "source": "Kourovka/EpimorphismSemantics.lean",
+      "destination": "Kourovka/Certificates/EpimorphismSemantics.lean",
+      "source_sha256": "ff784c6a91075b7712a4abe35358e3362cf722841d5755ba5748513eb5d5edbf"
+    },
+    {
+      "source": "Kourovka/FiniteCover.lean",
+      "destination": "Kourovka/Covers/FiniteCover.lean",
+      "source_sha256": "dcc889fbcf9fb6ab5e59f42e5f2489e90c4647a29814d585f403fea2e920f868"
+    },
+    {
+      "source": "Kourovka/FiniteModuleGenerators.lean",
+      "destination": "Kourovka/Modules/FiniteModuleGenerators.lean",
+      "source_sha256": "1afe30c17713843d2b7f223a2995a28e6d504f20d6099a3e96f66de848f3659f"
+    },
+    {
+      "source": "Kourovka/FiniteQuotient.lean",
+      "destination": "Kourovka/Presentations/FiniteQuotient.lean",
+      "source_sha256": "8c76068e51390d9836aa6aa0e263b4e1f9a49cab0dd7b78b5603fe95577b5989"
+    },
+    {
+      "source": "Kourovka/FourierMotzkin.lean",
+      "destination": "Kourovka/Polyhedral/FourierMotzkin.lean",
+      "source_sha256": "0c9ad0311aa41211c56741f04c0e352f4ff31c05a4e54952f4da6c72301320d9"
+    },
+    {
+      "source": "Kourovka/FreeAbelianPresentation.lean",
+      "destination": "Kourovka/Presentations/FreeAbelianPresentation.lean",
+      "source_sha256": "710c37e08d33d97e2915f93afed2ff3a3a1191c87285a3ca4104b1d22147de6b"
+    },
+    {
+      "source": "Kourovka/HalfspaceGeneration.lean",
+      "destination": "Kourovka/Halfspaces/HalfspaceGeneration.lean",
+      "source_sha256": "baed60e7653701fe9bfdb06335e7f0f2718790c2dc20610945a3fb1438890365"
+    },
+    {
+      "source": "Kourovka/HalfspaceGeometry.lean",
+      "destination": "Kourovka/Halfspaces/HalfspaceGeometry.lean",
+      "source_sha256": "9b4632c8f26dc5947ef37bb36f0432540676ee8cf708c8aff32c0e21cfe58f71"
+    },
+    {
+      "source": "Kourovka/HalfspaceLoopModule.lean",
+      "destination": "Kourovka/Halfspaces/HalfspaceLoopModule.lean",
+      "source_sha256": "5ef59ab8c4cba0f1d0d17399b7f310be767e0706aa623c82115d2f900d548ccb"
+    },
+    {
+      "source": "Kourovka/HalfspaceLoops.lean",
+      "destination": "Kourovka/Halfspaces/HalfspaceLoops.lean",
+      "source_sha256": "35a9c873ac1206866bde71093a94f6f7b510079fb041599682bbf96c6108a6cd"
+    },
+    {
+      "source": "Kourovka/HalfspaceModule.lean",
+      "destination": "Kourovka/Halfspaces/HalfspaceModule.lean",
+      "source_sha256": "c1ade5324e1c52a7cbe44197333961a3184b225ce9f934706bcc3bd5da5a796d"
+    },
+    {
+      "source": "Kourovka/HalfspaceRelators.lean",
+      "destination": "Kourovka/Halfspaces/HalfspaceRelators.lean",
+      "source_sha256": "b14390b053629cf561730e980c0e2e13030c325e920720c8b88196870336775d"
+    },
+    {
+      "source": "Kourovka/HalfspaceShift.lean",
+      "destination": "Kourovka/Halfspaces/HalfspaceShift.lean",
+      "source_sha256": "eb6f6db3ef0a43269e97a5a30b7550de2a9a02ce624c67be62cbb3482c6b8e61"
+    },
+    {
+      "source": "Kourovka/HalfspaceSplitting.lean",
+      "destination": "Kourovka/Halfspaces/HalfspaceSplitting.lean",
+      "source_sha256": "85a5eb8204daabf16bb5ba257b5f3fd0015cd1581700d670a7d12f2f2a7d8b5a"
+    },
+    {
+      "source": "Kourovka/IsomorphismSemantics.lean",
+      "destination": "Kourovka/Certificates/IsomorphismSemantics.lean",
+      "source_sha256": "cf97959fcbf01f2e661619d51c9a9e041c69a9f0ff2cfb2328053b2b272816a1"
+    },
+    {
+      "source": "Kourovka/KernelGenerators.lean",
+      "destination": "Kourovka/Presentations/KernelGenerators.lean",
+      "source_sha256": "beb65c69ce193e96f0fda6fb021c62349cf068dce1073ffa82f4fcf089b59273"
+    },
+    {
+      "source": "Kourovka/LatticePullback.lean",
+      "destination": "Kourovka/Cofinality/LatticePullback.lean",
+      "source_sha256": "29e987b916878a33a6acf641f3e5691726579a0d82dce9361a3595e63301e8ca"
+    },
+    {
+      "source": "Kourovka/LaurentAction.lean",
+      "destination": "Kourovka/Modules/LaurentAction.lean",
+      "source_sha256": "6753da462d107f691e788c26a38563d9e00c25ac265b4556d2b26b32cccc9776"
+    },
+    {
+      "source": "Kourovka/Main.lean",
+      "destination": "Kourovka/Enumeration/Main.lean",
+      "source_sha256": "376b9f548e65471b8006e6403c9e816dffa12a2d1393fb53c0a74063bfe1318b"
+    },
+    {
+      "source": "Kourovka/ModuleRealization.lean",
+      "destination": "Kourovka/Modules/ModuleRealization.lean",
+      "source_sha256": "ffa2a86eeecac429c0b78329eaf9698c20338350df77c38dd438e1a10fddea40"
+    },
+    {
+      "source": "Kourovka/NaturalWordCertificates.lean",
+      "destination": "Kourovka/Certificates/NaturalWordCertificates.lean",
+      "source_sha256": "63e86beebef20a23acfdf6e8ee1a4a599a8b491e3ed4d2c4a3e33e5c790d9b37"
+    },
+    {
+      "source": "Kourovka/NaturalWordSubstitution.lean",
+      "destination": "Kourovka/Certificates/NaturalWordSubstitution.lean",
+      "source_sha256": "9ff0616c888e9b6f0327714c471b2b8c8a2d96353da8ce3023a539214426ff64"
+    },
+    {
+      "source": "Kourovka/PresentationIsomorphism.lean",
+      "destination": "Kourovka/Certificates/PresentationIsomorphism.lean",
+      "source_sha256": "893a8704c8a9f80e60269e0047e45fb99e02e26b6237e7cce7e43a0b717febf0"
+    },
+    {
+      "source": "Kourovka/Presentations.lean",
+      "destination": "Kourovka/Presentations/Presentations.lean",
+      "source_sha256": "38fa14cb8368a8dabe56645d2d4bf09573fa8e872d5e7a9d73671f315529a23a"
+    },
+    {
+      "source": "Kourovka/PullbackPresentation.lean",
+      "destination": "Kourovka/Presentations/PullbackPresentation.lean",
+      "source_sha256": "0b23c60fc9d4cdbd85157fb197325542d2f24b90b8ba0cf89f0745d4efae5d97"
+    },
+    {
+      "source": "Kourovka/QuotientCodes.lean",
+      "destination": "Kourovka/Presentations/QuotientCodes.lean",
+      "source_sha256": "b7fd382b5e8f65f5c48f2ed375f4984ec18020a742b44a86d4aa0026f507f0ea"
+    },
+    {
+      "source": "Kourovka/Radius.lean",
+      "destination": "Kourovka/Polyhedral/Radius.lean",
+      "source_sha256": "db2365b6469d53fa65ea7e5e1963fa7d5c895b28379c4a641e4a43cfe46f4f9b"
+    },
+    {
+      "source": "Kourovka/RelatorCodes.lean",
+      "destination": "Kourovka/Presentations/RelatorCodes.lean",
+      "source_sha256": "ccd9416513504b48a237a1daee0f73ddad7d2edd86931d40061ddd54541e9bea"
+    },
+    {
+      "source": "Kourovka/Schreier/RelatorBasic.lean",
+      "destination": "Kourovka/Schreier/RelatorBasic.lean",
+      "source_sha256": "31bcdbc651c68012cbad51b88400f1a2c36223fb5184076c4b8fd7d6b769bf46"
+    },
+    {
+      "source": "Kourovka/Schreier/RelatorCongruence.lean",
+      "destination": "Kourovka/Schreier/RelatorCongruence.lean",
+      "source_sha256": "9a5108d73a9ed9f6f73a2f1c111c63306b4bdf8362e52963d8bdf10dec7f5738"
+    },
+    {
+      "source": "Kourovka/Schreier/RelatorOperations.lean",
+      "destination": "Kourovka/Schreier/RelatorOperations.lean",
+      "source_sha256": "f6d71cb5761bacf0cd1bc0c684a14ba6ffcf12509a3dbfb6dc14d4fb858f7ff1"
+    },
+    {
+      "source": "Kourovka/Schreier/Rewriting.lean",
+      "destination": "Kourovka/Schreier/Rewriting.lean",
+      "source_sha256": "b909cfb30c000fa5284b619530e6b1b0a1d16296ef18b29f36adb52c32139efa"
+    },
+    {
+      "source": "Kourovka/SchreierHeights.lean",
+      "destination": "Kourovka/Halfspaces/SchreierHeights.lean",
+      "source_sha256": "f0c42d6a9113634a4c92c3ef013920fd84a1b1949618410d981a6199aaa3d4a2"
+    },
+    {
+      "source": "Kourovka/SchreierKernel.lean",
+      "destination": "Kourovka/Halfspaces/SchreierKernel.lean",
+      "source_sha256": "3ea3aaa6d4e58045b2d72a0865090361cd364478e7d7a045a17cac726ac27b0f"
+    },
+    {
+      "source": "Kourovka/SchreierPaths.lean",
+      "destination": "Kourovka/Halfspaces/SchreierPaths.lean",
+      "source_sha256": "b6e302fa8bb100dca7055e6689406b410225df37ac786ce9831e91a84d5b09dd"
+    },
+    {
+      "source": "Kourovka/SignedTameness.lean",
+      "destination": "Kourovka/Modules/SignedTameness.lean",
+      "source_sha256": "8bfe372cea6290b28f37d50c79f4dec87a7695149f9e27040f524dff86bb434c"
+    },
+    {
+      "source": "Kourovka/TamenessCompactness.lean",
+      "destination": "Kourovka/Modules/TamenessCompactness.lean",
+      "source_sha256": "65e23074d8217fa3bc938c3ecf2a251063c5fb9d023456db8ebf4bca5bfd048e"
+    },
+    {
+      "source": "Kourovka/ValuationModule.lean",
+      "destination": "Kourovka/Modules/ValuationModule.lean",
+      "source_sha256": "9f07adfccf81a83464fa579f5fa3b7a800da81d65706a6ef29eedbf2d5efde7d"
+    },
+    {
+      "source": "Kourovka/VerifierExamples.lean",
+      "destination": "Tests/ConeExamples.lean",
+      "source_sha256": "c2d2788f1d05584550c99ee0dbe4475730a049db6da7dec8e9f9a6d48854d863"
+    },
+    {
+      "source": "Kourovka/WordCertificates.lean",
+      "destination": "Kourovka/Certificates/WordCertificates.lean",
+      "source_sha256": "db4b562ad0e2fbfe68d06087736d9ac9ab12b1e317ee9dbd09d13beff44c4fb8"
+    }
+  ]
+}

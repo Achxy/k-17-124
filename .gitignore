@@ -1,0 +1,11 @@
+.lake/
+.tools/
+.cache/
+.elan/
+.DS_Store
+*.olean
+*.ilean
+*.trace
+*.log
+__pycache__/
+.venv/

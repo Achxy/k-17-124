@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "Please cite this repository when using the Lean formalisation."
+type: software
+title: "Finite presentations of metabelian groups: Lean formalisation"
+authors:
+  - family-names: Jayadevan
+    given-names: Achyuth
+    orcid: "https://orcid.org/0009-0008-8745-4078"
+repository-code: "https://github.com/Achxy/k-17-124"
+abstract: >-
+  A Lean 4 formalisation of recursive enumerability of ordinary finite
+  presentations defining metabelian groups, using primitive-recursive
+  certificates from finite Laurent covers and epimorphisms.
+# Third-party Schreier sources retain their Apache-2.0 terms; see third_party.

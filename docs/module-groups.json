@@ -1,0 +1,12 @@
+{
+  "Presentations": "Presentations RelatorCodes FreeAbelianPresentation KernelGenerators CentralExtension CentralExtensionPresentation PullbackPresentation FiniteQuotient QuotientCodes",
+  "Computability": "Enumeration ComputableIntegers ComputableWords ComputablePresentations ComputableClosure",
+  "Certificates": "WordCertificates NaturalWordCertificates NaturalWordSubstitution PresentationIsomorphism ComputableIsomorphism IsomorphismSemantics ComputableEpimorphism EpimorphismSemantics",
+  "Polyhedral": "FourierMotzkin ComputableFourierMotzkin ConeVerifier ConeMargin ComputableCone Radius",
+  "Covers": "FiniteCover CertifiedRadius CertifiedCover CoverMargin CoverSoundness ComputableCoverData ComputableCoverWords ComputableCoverBounds ComputableCoverSemantics ComputableLatticeBall",
+  "Collection": "Collection CollectionFinite CollectionGeometry CollectionRadius",
+  "Modules": "LaurentAction CommutatorModule FiniteModuleGenerators ValuationModule TamenessCompactness SignedTameness ModuleRealization",
+  "Halfspaces": "HalfspaceGeometry HalfspaceGeneration HalfspaceRelators HalfspaceSplitting HalfspaceShift HalfspaceModule HalfspaceLoopModule HalfspaceLoops SchreierHeights SchreierKernel SchreierPaths BieriStrebelNecessity",
+  "Cofinality": "CofinalCover LatticePullback CofinalRealization Cofinality",
+  "Enumeration": "ComputableEnumeration EnumerationCofinality EnumerationCorrectness EpimorphismEnumeration Main"
+}
