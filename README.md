@@ -4,36 +4,204 @@ Lean 4 formalisation accompanying **Finite presentations of metabelian groups:
 effective enumeration via Laurent relations**, by
 [Achyuth Jayadevan](https://orcid.org/0009-0008-8745-4078).
 
-For an ordinary finite presentation `P`, the development constructs a
-primitive-recursive Boolean predicate `V` satisfying
+## Finite presentations and their encoding
 
-```text
-P is well formed and G(P) is metabelian  ↔  ∃ c ∈ ℕ, V(P, c) = true.
+The input type is
+
+```math
+\mathcal P=\mathbb N\times
+\operatorname{List}\bigl(\operatorname{List}(\mathbb N\times\operatorname{Bool})\bigr).
 ```
 
-Consequently, ordinary finite presentations defining metabelian groups are
-recursively enumerable. The group `G(P)` is the quotient of a free group by
-the normal closure of its relators. The result concerns presentations in the
-variety of all groups.
+An element $P=(n,R)$ specifies $n$ generators and a finite list of relator
+words. A letter $(i,\mathrm{true})$ denotes $x_i$, and
+$(i,\mathrm{false})$ denotes $x_i^{-1}$. Indices start at zero. In
+[Presentations.lean](Kourovka/Presentations/Presentations.lean),
 
-## Start here
+```math
+\begin{aligned}
+\operatorname{WF}(P)
+&\iff \forall w\in R\;\forall(i,\varepsilon)\in w,\quad i<n,\\
+G(P)
+&=F(x_0,\ldots,x_{n-1})\big/\langle\!\langle
+\operatorname{interpretWord}_n(R)\rangle\!\rangle.
+\end{aligned}
+```
 
-**[The main theorem](Kourovka/Paper.lean)** is the shortest entry point. Its three
-public results give primitive recursiveness, certificate correctness, and
-recursive enumerability. From there:
+`GroupOf` uses Mathlib's `PresentedGroup`: the quotient of the ordinary free
+group by the normal closure of the relators. `interpretWord` assigns the
+identity to an out-of-range letter; `WellFormed` excludes such letters from
+accepted presentations.
 
-1. Read [the input definitions](Kourovka/Presentations/Presentations.lean).
-2. Read [the certificate and its proof](Kourovka/Enumeration/EpimorphismEnumeration.lean).
-3. Follow [the mathematical reading guide](docs/reading-guide.md) into the algebraic ingredients.
+The natural-number decoder $d:\mathbb N\to\mathcal P$ satisfies
 
-The [paper-to-Lean map](docs/paper-map.md) lists the exact declarations behind
-each statement. [Small examples](Tests/PresentationExamples.lean) explain the
-alphabet convention and exercise both accepted and rejected inputs.
+```math
+d(\operatorname{encode}(P))=P.
+```
 
-## Build and verify
+It is total: a failed decode returns $(0,[])$, the empty presentation of the
+trivial group. Successfully decoded presentations must still satisfy
+$\operatorname{WF}$.
 
-Install [Lean via Elan](https://leanprover-community.github.io/get_started.html),
-then run:
+## The theorem checked by Lean
+
+The group property is the identity
+
+```math
+\operatorname{Met}(G)
+\iff
+\forall a,b,c,d\in G,\quad
+[a,b][c,d]=[c,d][a,b],
+\qquad [a,b]=aba^{-1}b^{-1}.
+```
+
+Define
+
+```math
+\mathcal M=\{m\in\mathbb N:
+\operatorname{WF}(d(m))\ \land\ \operatorname{Met}(G(d(m)))\}.
+```
+
+The formalisation constructs a primitive-recursive Boolean predicate
+
+```math
+V:\mathbb N\times\mathbb N\longrightarrow\operatorname{Bool}
+```
+
+and proves
+
+```math
+\forall m\in\mathbb N,\qquad
+m\in\mathcal M\ \iff\ \exists c\in\mathbb N,\quad V(m,c)=\mathrm{true}.
+```
+
+Consequently, $\mathcal M$ is recursively enumerable. The declarations in
+[Paper.lean](Kourovka/Paper.lean) are:
+
+```lean
+abbrev certificateCheck : ℕ → ℕ → Bool := EpimorphismEnumeration.check
+
+theorem certificateCheck_primrec : Primrec₂ certificateCheck :=
+  EpimorphismEnumeration.check_primrec
+
+theorem metabelian_iff_certificate (p : ℕ) :
+    DefinesMetabelian p ↔ ∃ c : ℕ, certificateCheck p c = true :=
+  EpimorphismEnumeration.check_correct p
+
+theorem metabelian_presentations_re : REPred DefinesMetabelian :=
+  EpimorphismEnumeration.kourovka_17_124_via_epimorphisms
+```
+
+Here `DefinesMetabelian m` is exactly
+`WellFormed (decodePresentation m) ∧ Metabelian (GroupOf (decodePresentation m))`.
+[Completion.lean](Tests/Completion.lean) also checks the recursive-enumerability
+statement with these definitions expanded to ordinary presented groups and
+four universally quantified group elements.
+
+## The finite certificate
+
+A decoded certificate is $((\mathcal D,r),e)$. The datum $\mathcal D$ consists
+of a positive lattice rank $k$, a positive kernel alphabet size $a$, designated
+commutator generators, and a finite list of signed, ordered Laurent term lists.
+The number $r\in\mathbb N$ specifies a dyadic cone margin, and $e\in\mathbb N$
+encodes an epimorphism certificate.
+
+For the decoded exponent vectors, set
+
+```math
+\begin{aligned}
+D(\mathcal D)
+&=1+\sum_{\lambda}\sum_{(u,c)\in\lambda}\|u\|_1,\\
+\rho(\mathcal D,r)
+&=1+2k\bigl(1+D(\mathcal D)+D(\mathcal D)^2k2^r\bigr).
+\end{aligned}
+```
+
+The sums count listed terms with multiplicity. Terms may have repeated
+exponents or zero coefficients; exponent lists are padded with zeros or
+truncated to $k$ coordinates. The equality of this integer formula with the
+geometric radius is proved in
+[ComputableCoverData.lean](Kourovka/Covers/ComputableCoverData.lean).
+
+The ordinary finite cover presentation $Q_{\mathcal D,\rho}$ has generators
+$t_0,\ldots,t_{k-1},z_0,\ldots,z_{a-1}$. Write
+$q(u)=t_0^{u_0}\cdots t_{k-1}^{u_{k-1}}$,
+$x^w=w^{-1}xw$, and $[x,y]_{\mathrm r}=x^{-1}y^{-1}xy$.
+Its relators are
+
+```math
+\begin{aligned}
+[t_i,t_j]_{\mathrm r}&=z_{A(i,j)} &&(i<j),\\
+[z_i,z_j^{q(v)}]_{\mathrm r}&=1 &&(\|v\|_2^2<\rho^2),\\
+z_i&=\prod_{(u,c)\in\lambda}(z_i^c)^{q(u)}
+&& (\lambda\text{ signed }+),\\
+z_i&=\prod_{(u,c)\in\lambda}(z_i^c)^{q(u)^{-1}}
+&& (\lambda\text{ signed }-).
+\end{aligned}
+```
+
+Each product follows the term-list order. In particular, $q(u)^{-1}$ is the
+literal inverse of the ordered word. These are the definitions in
+[FiniteCover.lean](Kourovka/Covers/FiniteCover.lean).
+
+Let $C(\mathcal D,r)$ denote the Boolean cone-margin check and
+$E(Q,P,e)$ the Boolean epimorphism check. The structured predicate is
+
+```math
+\begin{aligned}
+\operatorname{checkData}(P,((\mathcal D,r),e))
+={}&\operatorname{WF}(P)\ \land\\
+&\bigl(n=0\ \lor\
+(C(\mathcal D,r)\land E(Q_{\mathcal D,\rho(\mathcal D,r)},P,e))\bigr),
+\end{aligned}
+```
+
+where propositions on the right are evaluated as Booleans. Finally,
+$V(m,c)=\operatorname{checkData}(d(m),\operatorname{decodeCertificate}(c))$.
+These are the definitions `checkData` and `check` in
+[EpimorphismEnumeration.lean](Kourovka/Enumeration/EpimorphismEnumeration.lean).
+
+## Soundness, completeness, and effectivity
+
+**Soundness.** A successful cone check gives
+
+```math
+C(\mathcal D,r)=\mathrm{true}
+\quad\Longrightarrow\quad
+\operatorname{Met}(G(Q_{\mathcal D,\rho(\mathcal D,r)})).
+```
+
+[CoverSoundness.lean](Kourovka/Covers/CoverSoundness.lean) proves this by
+collection and strict decrease of squared lattice norms. An accepted
+epimorphism certificate gives a surjection onto $G(P)$, so the metabelian
+identity descends to $G(P)$. The zero-generator case is handled directly.
+
+**Completeness.** [Cofinality.lean](Kourovka/Cofinality/Cofinality.lean) proves
+that every finitely presented metabelian group is a quotient of a finite cover
+whose Laurent supports cover all directions. Its proof constructs the central
+pullback and Laurent module, proves the required Bieri–Strebel necessity
+statement, and extracts finitely many signed relations. Cone-margin existence
+and finite epimorphism certificates then give
+
+```math
+\operatorname{WF}(P)\land\operatorname{Met}(G(P))
+\quad\Longrightarrow\quad
+\exists c,\quad\operatorname{checkData}(P,c)=\mathrm{true}.
+```
+
+**Effectivity.** Rational Fourier–Motzkin elimination, the integer radius,
+finite relator construction, and the epimorphism check are proved primitive
+recursive. Word equalities use finite normal-closure certificates checked by
+free reduction. Thus checking a fixed certificate always terminates; searching
+for one terminates exactly on $\mathcal M$. The final step uses `Nat.rfind`
+in [Enumeration.lean](Kourovka/Computability/Enumeration.lean).
+
+The [statement correspondence](docs/paper-map.md) records the declarations
+for the individual results in the paper.
+
+## Reproducing the verification
+
+With [Elan](https://leanprover-community.github.io/get_started.html) and Python 3 installed:
 
 ```sh
 git clone https://github.com/Achxy/k-17-124.git
@@ -42,42 +210,15 @@ lake exe cache get
 ./scripts/check.sh
 ```
 
-Open this directory in VS Code with the **Lean 4** extension to inspect goals and definitions.
-`lean-toolchain` pins Lean **4.24.0**; `lake-manifest.json` fixes the complete
-Mathlib dependency graph. No sibling repository or custom workspace helper is
-needed. The first cache download can take several minutes.
+Lean **4.24.0** and the full Mathlib dependency graph are pinned. The check
+builds both complete theorem routes and the examples, treats Lean warnings as
+failures, and audits transitive dependencies for additional axioms.
+The permitted axioms are `propext`, `Classical.choice`, and `Quot.sound`.
+See [verification](docs/verification.md) for the precise checks.
 
-`lake build` builds the library and the kernel-checked examples. The full check
-also verifies module coverage and runs the transitive axiom audit. Details,
-including the exact expanded target, are in [verification](docs/verification.md).
+## Attribution
 
-## Organisation
-
-| Directory | Mathematical role |
-| --- | --- |
-| `Kourovka/Presentations` | Ordinary presentations, kernels, central extensions |
-| `Kourovka/Certificates` | Finite word, isomorphism, and epimorphism certificates |
-| `Kourovka/Computability` | Encodings, primitive recursion, enumeration |
-| `Kourovka/Polyhedral` | Rational elimination, cone coverage, margins |
-| `Kourovka/Covers` | Finite Laurent presentations and their soundness |
-| `Kourovka/Collection` | Reordering words inside a finite radius |
-| `Kourovka/Modules` | Conjugation modules and signed Laurent relations |
-| `Kourovka/Halfspaces` | The finite-presentation necessity argument |
-| `Kourovka/Cofinality` | Covers surjecting onto every finitely presented metabelian group |
-| `Kourovka/Enumeration` | Assembly of the certificate theorem |
-| `Kourovka/Schreier` | Adapted Reidemeister-Schreier infrastructure |
-| `Tests` | Expanded theorem statements and explicit boundary examples |
-
-Namespaces are preserved from the paper companion. The shorter epimorphism
-route is the primary reading path; the original isomorphism route remains
-available and is also audited.
-
-## Attribution and contributions
-
-The repository's existing [CC0 licence](LICENSE) applies to the original work.
-The four adapted Schreier modules retain their Apache-2.0 terms and attribution;
-see [third-party provenance](third_party/ProCGroups-PROVENANCE.md).
-[Source provenance](docs/provenance.md) records the reorganisation.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for proof and documentation conventions,
-and [CITATION.cff](CITATION.cff) for citation metadata.
+The original work is covered by [CC0](LICENSE). The currently adapted Schreier
+sources retain their Apache-2.0 terms and
+[attribution](third_party/ProCGroups-PROVENANCE.md).
+Citation metadata is in [CITATION.cff](CITATION.cff).
